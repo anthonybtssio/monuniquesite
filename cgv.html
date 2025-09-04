@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions Générales de Vente - MonSiteUnique</title>
+  <meta name="description" content="Conditions Générales de Vente de MonSiteUnique">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: '📑';
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8787);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+      color: white;
+    }
+
+    /* Hero */
+    .hero-section {
+      padding: 120px 2rem 60px;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: slideUp 1s ease forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: slideUp 1s ease 0.3s forwards;
+    }
+
+    /* Main Content */
+    .content-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      animation: slideUp 1s ease 0.6s forwards;
+    }
+
+    .content-container h2 {
+      color: #4ecdc4;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-container p {
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 4rem;
+    }
+
+    .footer a {
+      color: #4ecdc4;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: white;
+    }
+
+    .footer-divider {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+      margin: 2rem auto;
+    }
+
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1001;
+      transform: translateY(100%);
+      animation: slideUpBanner 0.5s ease forwards;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .cookie-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .accept-btn {
+      background: #4ecdc4;
+      color: white;
+    }
+
+    .accept-btn:hover {
+      background: #44a08d;
+    }
+
+    .more-info {
+      color: #ff6b6b;
+      text-decoration: none;
+    }
+
+    .more-info:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUpBanner {
+      to { transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-title { font-size: 2.2rem; }
+      .content-container { padding: 2rem 1rem; margin: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">MonSiteUnique</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="tarifs.html">Tarifs</a></li>
+        <li><a href="devis.html">Devis</a></li>
+        <li><a href="commander.html" class="btn-primary">Commander</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-section">
+    <h1 class="hero-title">Conditions Générales de Vente</h1>
+    <p class="hero-subtitle">Les règles qui encadrent nos services et prestations</p>
+  </section>
+
+  <!-- Content -->
+  <main class="content-container">
+    <h2>Objet</h2>
+    <p>Ces conditions définissent les modalités de vente de mes services de création de sites web.</p>
+
+    <h2>Prestations</h2>
+    <p>Je fournis un site web fonctionnel selon le devis accepté par le client.</p>
+
+    <h2>Tarifs et paiement</h2>
+    <p>30% d’acompte à la commande. Le solde est dû à la livraison du site.</p>
+
+    <h2>Délais</h2>
+    <p>Les délais de livraison sont donnés à titre indicatif et peuvent varier selon la complexité du projet.</p>
+
+    <h2>Responsabilités</h2>
+    <p>Je m’engage à livrer un site fonctionnel. Je ne suis pas responsable des problèmes liés à l’hébergeur, aux modifications non autorisées ou aux attaques extérieures.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <p>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      <a href="cgv.html">CGV</a>
+    </p>
+    <p style="margin-top: 1rem; opacity: 0.6;">© 2025 MonSiteUnique - Création de sites web avec passion</p>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" class="cookie-banner">
+    <div>🍪 Ce site utilise des cookies pour améliorer votre expérience.</div>
+    <div class="cookie-buttons">
+      <button class="cookie-btn accept-btn" onclick="acceptCookies()">Accepter</button>
+      <a href="politique-confidentialite.html" class="more-info">En savoir plus</a>
+    </div>
+  </div>
+
+  <script>
+    // Cookie banner
+    function acceptCookies() {
+      document.getElementById("cookie-banner").style.display = "none";
+      localStorage.setItem("cookiesAccepted", "true");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("cookiesAccepted") === "true") {
+        document.getElementById("cookie-banner").style.display = "none";
+      }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("navbar");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>

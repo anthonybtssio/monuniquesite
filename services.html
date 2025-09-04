@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Services - MonSiteUnique</title>
+    <meta name="description" content="Découvrez mes services de création de sites web : design responsive, référencement SEO, sécurisation HTTPS et bien plus.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🚀';
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+            background: linear-gradient(45deg, #fff, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: slideUp 1s ease 0.3s forwards;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card.expanded {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .service-card.expanded::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .service-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .service-description {
+            opacity: 0.9;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .service-card.expanded .service-description {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+
+        .service-preview {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Process Section */
+        .process-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            margin: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .process-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #4ecdc4;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            color: white;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #4ecdc4;
+        }
+
+        .step-description {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(78, 205, 196, 0.6);
+            color: white;
+        }
+
+        .cta-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1001;
+            transform: translateY(100%);
+            animation: slideUpBanner 0.5s ease forwards;
+        }
+
+        .cookie-content {
+            flex: 1;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accept-btn {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background: #44a08d;
+        }
+
+        .more-info {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #4ecdc4;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            margin: 2rem auto;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpBanner {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cookie-banner {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .process-section {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MonSiteUnique</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="tarifs.html">Tarifs</a></li>
+                <li><a href="devis.html">Devis</a></li>
+                <li><a href="commander.html" class="btn-primary">Commander</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Mes Services</h1>
+        <p>Des solutions web complètes et professionnelles pour concrétiser vos projets digitaux</p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">📱</span>
+                <h3 class="service-title">
+                    Création Responsive
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Sites adaptés à tous les écrans</p>
+                <div class="service-description">
+                    Je crée un site web qui s'adapte parfaitement à tous les écrans (ordinateur, tablette, smartphone), 
+                    pour une expérience utilisateur optimale. Design fluide et navigation intuitive garantis sur tous les appareils.
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">🎨</span>
+                <h3 class="service-title">
+                    Design Sur Mesure
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Interface 100% personnalisée</p>
+                <div class="service-description">
+                    Chaque site est unique : choix des couleurs, typographie et structure selon vos envies et votre identité. 
+                    Possibilité d'ajouter des options et des fonctions personnalisées pour répondre parfaitement à vos besoins spécifiques.
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">🌐</span>
+                <h3 class="service-title">
+                    Mise en Ligne
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Hébergement et domaine configurés</p>
+                <div class="service-description">
+                    Je m'occupe de publier votre site sur un hébergement sécurisé et performant. Configuration de votre nom 
+                    de domaine, certificats SSL, et optimisation des performances pour un site rapide et accessible 24h/24. (Voir les tarifs selon le nom de domaine)
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">🚀</span>
+                <h3 class="service-title">
+                    Référencement SEO
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Visibilité optimisée sur Google</p>
+                <div class="service-description">
+                    Votre site sera optimisé pour les moteurs de recherche (Google) avec des balises meta personnalisées, 
+                    une structure SEO-friendly, et des contenus optimisés pour que vos clients vous trouvent facilement en ligne.
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">🔒</span>
+                <h3 class="service-title">
+                    Sécurité HTTPS
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Protection des données garantie</p>
+                <div class="service-description">
+                    Votre site sera sécurisé avec un certificat SSL (HTTPS), garantissant la protection des données échangées 
+                    avec vos visiteurs et améliorant votre référencement sur Google. Sécurité et confiance assurées.
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card" onclick="toggleService(this)">
+                <span class="service-icon">⚡</span>
+                <h3 class="service-title">
+                    Performance Optimisée
+                    <span class="expand-icon">▼</span>
+                </h3>
+                <p class="service-preview">Sites ultra-rapides</p>
+                <div class="service-description">
+                    Optimisation complète des performances : compression d'images, code minifié, cache intelligent. 
+                    Votre site se chargera rapidement, améliorant l'expérience utilisateur et le référencement naturel.
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Section -->
+        <div class="process-section loading">
+            <h2 class="process-title">Mon Processus de Création</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Analyse de vos besoins</h3>
+                    <p class="step-description">Échange pour comprendre votre projet, vos objectifs et votre identité</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Conception et maquette</h3>
+                    <p class="step-description">Création du design et de l'architecture de votre site sur mesure</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Développement</h3>
+                    <p class="step-description">Codage professionnel avec technologies modernes et bonnes pratiques</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Tests et livraison</h3>
+                    <p class="step-description">Vérifications complètes, mise en ligne et formation à l'utilisation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section loading">
+        <h2 class="cta-title">Prêt à créer votre site ?</h2>
+        <p class="cta-subtitle">Transformons ensemble vos idées en réalité digitale professionnelle</p>
+        <div class="cta-buttons">
+            <a href="devis.html" class="cta-primary">Demander un devis</a>
+            <a href="contact.html" class="cta-secondary">Me contacter</a>
+        </div>
+    </section>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            🍪 Ce site utilise des cookies pour améliorer votre expérience de navigation.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn accept-btn" onclick="acceptCookies()">Accepter</button>
+            <a href="politique-confidentialite.html" class="more-info">En savoir plus</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-divider"></div>
+        <p>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+            <a href="cgv.html">CGV</a>
+        </p>
+        <p style="margin-top: 1rem; opacity: 0.6;">© 2025 MonSiteUnique - Services web professionnels</p>
+    </footer>
+
+    <script>
+        // Toggle Service Details
+        function toggleService(card) {
+            const isExpanded = card.classList.contains('expanded');
+            
+            // Close all cards
+            document.querySelectorAll('.service-card').forEach(c => {
+                c.classList.remove('expanded');
+            });
+            
+            // Open clicked card if it wasn't expanded
+            if (!isExpanded) {
+                card.classList.add('expanded');
+            }
+        }
+
+        // Cookie Banner Management
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            sessionStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        window.onload = function() {
+            if(sessionStorage.getItem('cookiesAccepted') === 'true'){
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        };
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'slideUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe loading elements
+        document.querySelectorAll('.loading').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Observe service cards for staggered animation
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

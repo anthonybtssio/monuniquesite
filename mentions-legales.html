@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions légales</title>
+  <meta name="description" content="Page des mentions légales de MonSiteUnique">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(20px);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+    .btn-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8787);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover { transform: translateY(-3px); }
+
+    /* Main content */
+    main {
+      max-width: 900px;
+      margin: 140px auto 4rem;
+      padding: 2rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    main h1 { color: #4ecdc4; text-align: center; margin-bottom: 30px; }
+    main h2 { color: #fff; margin-top: 25px; border-left: 4px solid #4ecdc4; padding-left: 10px; }
+    main p { margin: 10px 0; color: rgba(255,255,255,0.9); }
+    main a { color: #4ecdc4; text-decoration: none; }
+    main a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: rgba(255,255,255,0.8);
+      margin-top: 4rem;
+    }
+    footer a {
+      color: #4ecdc4;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    footer a:hover { color: white; }
+    .footer-divider {
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+      margin: 2rem auto;
+    }
+
+    /* Cookie Banner */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      z-index: 1001;
+    }
+    #cookie-banner button {
+      background: #4ecdc4;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #cookie-banner button:hover { background: #44a08d; }
+
+    /* Animations */
+    @keyframes float {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      main { margin: 20px; padding: 1.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">MonSiteUnique</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Mes services</a></li>
+        <li><a href="projets.html">Mes projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="tarifs.html">Tarifs</a></li>
+        <li><a href="devis.html">Devis</a></li>
+        <li><a href="commander.html" class="btn-primary">Commander</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main>
+    <h1>Mentions légales</h1>
+
+    <h2>Éditeur du site</h2>
+    <p><strong>Nom / Raison sociale :</strong> MonSiteUnique</p>
+    <p><strong>Adresse :</strong> Saint-Julien-en-Genevois (74160), France</p>
+    <p><strong>Email :</strong> <a href="mailto:monuniquesite@gmail.com">monuniquesite@gmail.com</a></p>
+    <p><strong>Téléphone :</strong> +33 6 20 14 94 55</p>
+    <p><strong>SIRET :</strong> En cours d'immatriculation</p>
+
+    <h2>Hébergement</h2>
+    <p>Le site est hébergé par : GitHub, Inc.</p>
+    <p>Adresse : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
+    <p>Site web : <a href="https://github.com" target="_blank">https://github.com</a></p>
+    <p>Important : Les données sont hébergées aux États-Unis. GitHub respecte les clauses contractuelles types approuvées par la Commission européenne pour les transferts de données hors UE.</p>
+
+    <h2>Responsable de publication</h2>
+    <p>ABOU HABLE Anthony</p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>L’ensemble du contenu présent sur ce site (textes, images, graphismes, logo, etc.) est, sauf mention contraire, 
+    la propriété exclusive de MonSiteUnique. 
+    Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, 
+    quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable.</p>
+
+    <h2>Données personnelles</h2>
+    <p>Les informations collectées via les formulaires présents sur ce site sont utilisées uniquement 
+    pour répondre aux demandes des utilisateurs. 
+    Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d’un droit d’accès, 
+    de rectification et de suppression de vos données, que vous pouvez exercer en écrivant à l’adresse suivante : 
+    <a href="mailto:monuniquesite@gmail.com">monuniquesite@gmail.com</a>.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-divider"></div>
+    <p>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+      <a href="cgv.html">Conditions Générales de Vente</a>
+    </p>
+    <p>&copy; 2025 MonSiteUnique – Tous droits réservés.</p>
+  </footer>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner">
+    🍪 Ce site utilise des cookies pour améliorer votre expérience. 
+    <button onclick="acceptCookies()">Accepter</button>
+    <a href="politique-confidentialite.html">En savoir plus</a>
+  </div>
+
+  <script>
+    function acceptCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      localStorage.setItem('cookiesAccepted', 'true');
+    }
+    window.onload = function() {
+      if(localStorage.getItem('cookiesAccepted') === 'true'){
+        document.getElementById('cookie-banner').style.display = 'none';
+      }
+    };
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      const navbar = document.getElementById("navbar");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+</html>

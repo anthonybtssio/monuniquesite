@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis Gratuit - MonSiteUnique</title>
+    <meta name="description" content="Obtenez votre devis personnalisé pour la création de votre site web sur mesure">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🚀';
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 2rem 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: slideUp 1s ease forwards;
+            background: linear-gradient(45deg, #fff, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            opacity: 0;
+            animation: slideUp 1s ease 0.3s forwards;
+        }
+
+        /* Devis Section */
+        .devis-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .devis-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            animation: slideUp 1s ease 0.6s forwards;
+        }
+
+        .section-title {
+            color: #4ecdc4;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: white;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Form Styles */
+        .devis-form {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section-title {
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Pack Selection */
+        .pack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .pack-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .pack-card:hover {
+            transform: translateY(-5px);
+            border-color: #4ecdc4;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+
+        .pack-card.selected {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .pack-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .pack-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .pack-name {
+            color: #4ecdc4;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .pack-price {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .pack-features {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Options */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option-item.selected {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .option-checkbox {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            accent-color: #4ecdc4;
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-name {
+            color: white;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .option-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .option-price {
+            color: #4ecdc4;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4ecdc4;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .price-summary-title {
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .price-total {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-detail {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* RGPD */
+        .rgpd-section {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+        }
+
+        .rgpd-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            margin-top: 2px;
+            accent-color: #4ecdc4;
+        }
+
+        .rgpd-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        .rgpd-text a {
+            color: #4ecdc4;
+            text-decoration: none;
+        }
+
+        .rgpd-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(78, 205, 196, 0.4);
+            margin: 2rem auto 0;
+            display: block;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(78, 205, 196, 0.6);
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1001;
+            transform: translateY(100%);
+            animation: slideUpBanner 0.5s ease forwards;
+        }
+
+        .cookie-content {
+            flex: 1;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cookie-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .accept-btn {
+            background: #4ecdc4;
+            color: white;
+        }
+
+        .accept-btn:hover {
+            background: #44a08d;
+        }
+
+        .more-info {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #4ecdc4;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+            margin: 2rem auto;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUpBanner {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .devis-container {
+                padding: 2rem 1rem;
+                margin: 0 1rem;
+            }
+            
+            .pack-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cookie-banner {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MonSiteUnique</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="tarifs.html">Tarifs</a></li>
+                <li><a href="devis.html" class="active">Devis</a></li>
+                <li><a href="commander.html" class="btn-primary">Commander</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Devis Gratuit</h1>
+            <p class="hero-subtitle">
+                Obtenez votre estimation personnalisée en quelques clics
+            </p>
+        </div>
+    </section>
+
+    <!-- Devis Section -->
+    <section class="devis-section">
+        <div class="devis-container">
+            <h2 class="section-title">💰 Configurateur de Devis</h2>
+            <p class="section-subtitle">
+                Personnalisez votre projet et obtenez instantanément votre devis
+            </p>
+
+            <form class="devis-form" action="https://formspree.io/f/xwpnvglo" method="POST">
+                <!-- Informations Client -->
+                <div class="form-section">
+                    <h3 class="form-section-title">👤 Vos Informations</h3>
+                    
+                    <div class="form-group">
+                        <label for="nom" class="form-label">Nom et Prénom *</label>
+                        <input type="text" id="nom" name="nom" class="form-input" placeholder="Jean Dupont" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="jean@exemple.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entreprise" class="form-label">Entreprise / Organisation</label>
+                        <input type="text" id="entreprise" name="entreprise" class="form-input" placeholder="Mon Entreprise SARL">
+                    </div>
+                </div>
+
+                <!-- Choix du Pack -->
+<div class="form-section">
+    <h3 class="form-section-title">📦 Choisissez votre Pack</h3>
+    
+    <div class="pack-grid">
+        <label class="pack-card" for="pack-vitrine">
+            <input type="radio" id="pack-vitrine" name="pack" value="Site Vitrine - 210€" class="pack-input" data-price="210" required>
+            <span class="pack-icon">🖥️</span>
+            <div class="pack-name">Site Vitrine</div>
+            <div class="pack-price">À partir de 210€</div>
+            <div class="pack-features">
+                Sans référencement<br>
+                Design responsive<br>
+                Pages essentielles (3 à 5 pages)<br>
+                Formulaire de contact<br>
+                Optimisation mobile<br>
+                Hébergement conseillé
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-seo">
+            <input type="radio" id="pack-seo" name="pack" value="Site Vitrine SEO - 280€" class="pack-input" data-price="280" required>
+            <span class="pack-icon">🔍</span>
+            <div class="pack-name">Site Vitrine SEO</div>
+            <div class="pack-price">280€</div>
+            <div class="pack-features">
+                Tout du site vitrine<br>
+                Optimisation SEO<br>
+                Balises meta optimisées<br>
+                Structure SEO-friendly<br>
+                Analytics intégré
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-personnalise">
+            <input type="radio" id="pack-personnalise" name="pack" value="Site Personnalisé - 300€" class="pack-input" data-price="300" required>
+            <span class="pack-icon">🎨</span>
+            <div class="pack-name">Site Personnalisé</div>
+            <div class="pack-price">À partir de 300€</div>
+            <div class="pack-features">
+                Design 100% unique<br>
+                Fonctionnalités sur mesure<br>
+                Intégrations avancées<br>
+                Animations personnalisées<br>
+                Support premium
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-wordpress">
+            <input type="radio" id="pack-wordpress" name="pack" value="Site WordPress - 300€" class="pack-input" data-price="300" required>
+            <span class="pack-icon">📦</span>
+            <div class="pack-name">Site WordPress</div>
+            <div class="pack-price">300€</div>
+            <div class="pack-features">
+                CMS professionnel<br>
+                Installation WordPress<br>
+                Thème personnalisé<br>
+                Interface d'administration<br>
+                Extensions essentielles<br>
+                Formation incluse
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-ecommerce">
+            <input type="radio" id="pack-ecommerce" name="pack" value="Pack E-commerce - 1000–1500€" class="pack-input" data-price="1000" required>
+            <span class="pack-icon">🛒</span>
+            <div class="pack-name">Pack E-commerce</div>
+            <div class="pack-price">1000–1500€</div>
+            <div class="pack-features">
+                Boutique en ligne (20 produits max)<br>
+                Paiement sécurisé (PayPal, Stripe)<br>
+                Gestion des stocks et commandes<br>
+                Pages : Accueil, Boutique, Panier, Contact, CGV<br>
+                Design responsive + SEO de base<br>
+                Formation pour gérer le site
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-blog">
+            <input type="radio" id="pack-blog" name="pack" value="Blog / Portfolio - 350€" class="pack-input" data-price="350" required>
+            <span class="pack-icon">📝</span>
+            <div class="pack-name">Blog / Portfolio</div>
+            <div class="pack-price">350€</div>
+            <div class="pack-features">
+                Design moderne et responsive<br>
+                Pages Blog / Portfolio / Contact<br>
+                Système de publication facile<br>
+                Galerie photos et médias<br>
+                Optimisation SEO de base
+            </div>
+        </label>
+
+        <label class="pack-card" for="pack-avance">
+            <input type="radio" id="pack-avance" name="pack" value="Pack Avancé - 500€" class="pack-input" data-price="500" required>
+            <span class="pack-icon">🚀</span>
+            <div class="pack-name">Pack Avancé</div>
+            <div class="pack-price">À partir de 500€</div>
+            <div class="pack-features">
+                Site complet sur mesure<br>
+                Design entièrement personnalisé<br>
+                Fonctionnalités sur demande<br>
+                Animations et effets avancés<br>
+                Optimisation SEO complète<br>
+                Support et maintenance premium
+            </div>
+        </label>
+    </div>
+</div>
+
+<!-- Options supplémentaires demandées -->
+<div class="form-section">
+    <h3 class="form-section-title">⚙️ Options sur demande</h3>
+
+    <div class="options-grid">
+        <!-- Nombre de pages -->
+<div class="option-item" style="flex-direction: column; align-items: flex-start;">
+    <input type="number" id="option-pages-supp" name="options[]" class="form-input" placeholder="Nombre de pages" min="1" style="width: 100%; margin-bottom: 0.5rem;">
+    <div class="option-content" style="width: 100%;">
+        <div class="option-name">📄 Nombre de pages</div>
+        <div class="option-description">
+            Indiquez combien de pages vous souhaitez sur votre site. Chaque page supplémentaire ajoutera un coût supplémentaire.
+        </div>
+    </div>
+</div>
+
+
+        <!-- Nom de domaine -->
+<div class="option-item" style="flex-direction: column; align-items: flex-start;">
+    <select id="option-domaine" name="options[]" class="form-input" style="width: 100%; margin-bottom: 0.5rem; color: inherit; background: rgba(255, 255, 255, 0.1);">
+        <option value="" disabled selected>Sélectionnez une extension de domaine</option>
+        <option value=".fr">.fr (Création: 10€, Renouvellement: 20€/an)</option>
+        <option value=".com">.com (Création: 15€, Renouvellement: 20€/an)</option>
+        <option value=".eu">.eu (Création: 13€, Renouvellement: 20€/an)</option>
+        <option value=".org">.org (Création: 18€, Renouvellement: 20€/an)</option>
+        <option value=".net">.net (Création: 20€, Renouvellement: 20€/an)</option>
+    </select>
+    <div class="option-content" style="width: 100%;">
+        <div class="option-name">🌐 Nom de domaine</div>
+        <div class="option-description">
+            Choisissez l’extension de domaine que vous souhaitez utiliser pour votre site.
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        <!-- Support et maintenance premium -->
+        <label class="option-item" for="option-support-premium">
+            <input type="checkbox" id="option-support-premium" name="options[]" value="Support et maintenance premium" class="option-checkbox">
+            <div class="option-content">
+                <div class="option-name">🛠️ Support & maintenance premium</div>
+                <div class="option-description">Inclut assistance prioritaire et mises à jour régulières pour votre site.</div>
+            </div>
+        </label>
+    </div>
+</div>
+
+
+                <!-- Description du Projet -->
+                <div class="form-section">
+                    <h3 class="form-section-title">💡 Votre Projet</h3>
+                    
+                    <div class="form-group">
+                        <label for="description" class="form-label">Décrivez votre projet *</label>
+                        <textarea id="description" name="description" class="form-input form-textarea" 
+                                placeholder="Décrivez votre activité, vos objectifs, votre public cible, vos préférences de design..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline" class="form-label">Délai souhaité</label>
+                        <input type="text" id="deadline" name="deadline" class="form-input" placeholder="Ex: Dans 1 mois, urgent, pas de contrainte...">
+                    </div>
+                </div>
+
+                <!-- Résumé du Prix -->
+                <div class="price-summary" id="price-summary">
+                    <div class="price-summary-title">💰 Total de votre devis</div>
+                    <div class="price-total" id="price-total">0€</div>
+                    <div class="price-detail" id="price-detail">Sélectionnez un pack pour voir le prix</div>
+                </div>
+
+                <!-- RGPD -->
+                <div class="rgpd-section">
+                    <input type="checkbox" id="rgpd" name="rgpd" class="rgpd-checkbox" required>
+                    <div class="rgpd-text">
+                        <strong>Protection des données :</strong> J'accepte que mes informations personnelles soient traitées 
+                        conformément à la <a href="politique-confidentialite.html" target="_blank">politique de confidentialité</a>. 
+                        Ces données servent uniquement à établir votre devis et ne seront jamais partagées. *
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <input type="hidden" id="total-price" name="prix-total" value="0">
+                <button type="submit" class="submit-btn">
+                    🚀 Recevoir mon devis gratuit
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            🍪 Ce site utilise des cookies pour améliorer votre expérience de navigation.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn accept-btn" onclick="acceptCookies()">Accepter</button>
+            <a href="politique-confidentialite.html" class="more-info">En savoir plus</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-divider"></div>
+        <p>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+            <a href="cgv.html">CGV</a>
+        </p>
+        <p style="margin-top: 1rem; opacity: 0.6;">© 2025 MonSiteUnique - Création de sites web avec passion</p>
+    </footer>
+
+    <script>
+    // Variables pour le calcul du prix
+    let basePrice = 0;
+    let totalPrice = 0;
+    const pagePrice = 10; // prix par page supplémentaire
+    const domainPrices = {
+        ".fr": 10,
+        ".com": 15,
+        ".eu": 13,
+        ".org": 18,
+        ".net": 20
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const packInputs = document.querySelectorAll('input[name="pack"]');
+        const optionInputs = document.querySelectorAll('input[name="options[]"]');
+        const packCards = document.querySelectorAll('.pack-card');
+        const optionItems = document.querySelectorAll('.option-item');
+        const pageInput = document.getElementById('option-pages-supp');
+        const domainSelect = document.getElementById('option-domaine');
+
+        // Gestion des packs
+        packInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                packCards.forEach(card => card.classList.remove('selected'));
+                if (this.checked) {
+                    this.closest('.pack-card').classList.add('selected');
+                    basePrice = parseInt(this.dataset.price);
+                    updatePrice();
+                }
+            });
+        });
+
+        // Gestion des options checkbox
+        optionInputs.forEach(input => {
+            if (input.type === "checkbox") {
+                input.addEventListener('change', function() {
+                    const optionItem = this.closest('.option-item');
+                    if (this.checked) {
+                        optionItem.classList.add('selected');
+                    } else {
+                        optionItem.classList.remove('selected');
+                    }
+                    updatePrice();
+                });
+            }
+        });
+
+        // Gestion du nombre de pages
+        if (pageInput) {
+            pageInput.addEventListener('input', updatePrice);
+        }
+
+        // Gestion du domaine
+        if (domainSelect) {
+            domainSelect.addEventListener('change', updatePrice);
+        }
+
+        function updatePrice() {
+            let optionsPrice = 0;
+
+            // Checkbox options
+            optionInputs.forEach(input => {
+                if (input.type === "checkbox" && input.checked) {
+                    optionsPrice += parseInt(input.dataset.price) || 0;
+                }
+            });
+
+            // Nombre de pages
+            const pages = parseInt(pageInput?.value) || 0;
+            optionsPrice += pages * pagePrice;
+
+            // Domaine
+            const selectedDomain = domainSelect?.value;
+            if (selectedDomain && domainPrices[selectedDomain]) {
+                optionsPrice += domainPrices[selectedDomain];
+            }
+
+            totalPrice = basePrice + optionsPrice;
+
+            const priceTotal = document.getElementById('price-total');
+            const priceDetail = document.getElementById('price-detail');
+            const hiddenInput = document.getElementById('total-price');
+
+            priceTotal.textContent = totalPrice + '€';
+            hiddenInput.value = totalPrice;
+
+            if (basePrice > 0) {
+                let details = [];
+                details.push("Pack choisi");
+                if (pages > 0) details.push(`${pages} page(s) supplémentaire(s)`);
+                if (selectedDomain) details.push(`Domaine ${selectedDomain}`);
+                optionInputs.forEach(input => {
+                    if (input.type === "checkbox" && input.checked) details.push(input.value);
+                });
+                priceDetail.textContent = details.join(" + ");
+            } else {
+                priceDetail.textContent = "Sélectionnez un pack pour voir le prix";
+            }
+        }
+
+        // Soumission du formulaire
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); 
+            alert("✅ Merci, votre demande de devis a bien été envoyée !");
+            form.reset();
+            document.getElementById("price-total").textContent = "0€";
+            document.getElementById("price-detail").textContent = "Sélectionnez un pack pour voir le prix";
+            document.getElementById("total-price").value = "0";
+            packCards.forEach(card => card.classList.remove('selected'));
+            optionItems.forEach(item => item.classList.remove('selected'));
+            basePrice = 0;
+            totalPrice = 0;
+        });
+    });
+
+    // Cookie banner
+    function acceptCookies() {
+        document.getElementById("cookie-banner").style.display = "none";
+        localStorage.setItem("cookiesAccepted", "true");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem("cookiesAccepted") === "true") {
+            document.getElementById("cookie-banner").style.display = "none";
+        }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+
